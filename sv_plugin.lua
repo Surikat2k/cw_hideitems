@@ -9,7 +9,7 @@ function PLUGIN:Think()
 
 		if (!entityID.RealPos) then
 			entityID.RealPos = entityID:GetPos();
-            entityID:SetNWVector("realPosNW", entityID:GetPos())
+			entityID:SetNWVector("realPosNW", entityID:GetPos())
 		else
 
 			if (itemEntity.category == "Артефакты") then
@@ -19,7 +19,7 @@ function PLUGIN:Think()
 			end;
 
 			if (!entityID.Shared) then
-                entityID:GetPhysicsObject():Sleep();
+				entityID:GetPhysicsObject():Sleep();
 				entityID:SetNoDraw(true);
 				entityID:SetPos(Vector(0, 0, -1000));
 			end;
@@ -27,30 +27,30 @@ function PLUGIN:Think()
 			local plyTable = {};
 
 			local sphereTable = ents.FindInSphere(entityID.RealPos, dist)
-            for _, ply in pairs(sphereTable) do
+			for _, ply in pairs(sphereTable) do
 				if ply:IsPlayer() then
 					table.insert(plyTable, ply);
 				end;
-            end;
+			end;
 			for _, ply in pairs(sphereTable) do
 
 				if (#plyTable != 0) then
-		        	if (entityID.Shared) then
+					if (entityID.Shared) then
 						entityID.RealPos = entityID:GetPos();
-                        entityID:SetNWVector("realPosNW", entityID:GetPos())
-		        	else
-			        	entityID:SetPos(entityID.RealPos);
-            			entityID:GetPhysicsObject():Wake();
-			        	entityID:SetNoDraw(false);
-			        	entityID.Shared = true;
+						entityID:SetNWVector("realPosNW", entityID:GetPos())
+					else
+						entityID:SetPos(entityID.RealPos);
+						entityID:GetPhysicsObject():Wake();
+						entityID:SetNoDraw(false);
+						entityID.Shared = true;
 					end
 				else
 					entityID:SetNoDraw(true);
-            		entityID:GetPhysicsObject():Sleep();
+					entityID:GetPhysicsObject():Sleep();
 					entityID:SetPos(Vector(0, 0, -1000));
-			        entityID.Shared = false;
+					entityID.Shared = false;
 				end;
-		    end;
+			end;
 		end;
 	end;
 end;
